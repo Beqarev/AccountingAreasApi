@@ -13,22 +13,25 @@ public class AreaRepository : IAreaRepository
     {
         _context = context;
     }
-    public async Task<Area> Get(int Id)
+    public async Task<Area> Get(int id)
     {
-        var area = await _context.Areas.FindAsync(Id);
-        if (area is null)
-            return null;
+        var area = await _context.Areas
+            .Include(a => a.Region)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        
         return area;
     }
 
     public async Task<List<Area>> GetAll()
     {
-        var areas = await _context.Areas.ToListAsync();
+        var areas = await _context.Areas.Include(a => a.Region).ToListAsync();
         return areas;
     }
 
     public async Task<Area> Add(Area area)
     {
+        var region = _context.Regions.FirstOrDefault(r => r.Id == area.Region.Id);
+        area.Region = region;
         _context.Areas.Add(area);
         await _context.SaveChangesAsync();
         return await _context.Areas.FindAsync(area.Id);
