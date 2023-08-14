@@ -1,5 +1,7 @@
+using AccountingAreasApi.Dto;
 using AccountingAreasApi.Interfaces;
 using AccountingAreasApi.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountingAreasApi.Controllers;
@@ -9,39 +11,44 @@ namespace AccountingAreasApi.Controllers;
 public class AreaController : ControllerBase
 {
     private readonly IAreaRepository _areaRepository;
+    private readonly IMapper _mapper;
 
-    public AreaController(IAreaRepository areaRepository)
+    public AreaController(IAreaRepository areaRepository, IMapper mapper)
     {
         _areaRepository = areaRepository;
+        _mapper = mapper;
     }
 
 
     [HttpGet]
-    public async Task<ActionResult<List<Area>>> GetAllAreas()
+    public async Task<ActionResult<List<AreaDto>>> GetAllAreas()
     {
-        return await _areaRepository.GetAll();
+        var areas = _mapper.Map<AreaDto>(await _areaRepository.GetAll());
+        return Ok(areas);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Area>> GetArea(int id)
+    public async Task<ActionResult<AreaDto>> GetArea(int id)
     {
-        var result = await _areaRepository.Get(id);
+        var result = _mapper.Map<AreaDto>(await _areaRepository.Get(id));
 
         return Ok(result);
     }
 
 
     [HttpPost]
-    public async Task<ActionResult<Area>> AddArea(Area area)
+    public async Task<ActionResult<Area>> AddArea([FromBody] AreaDto area)
     {
-        var result = await _areaRepository.Add(area);
+        var areaMap = _mapper.Map<Area>(area);
+        var result = await _areaRepository.Add(areaMap);
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Area>> UpdateArea(int id, Area request)
+    public async Task<ActionResult<Area>> UpdateArea(int id, [FromBody] AreaDto request)
     {
-        var result = await _areaRepository.Update(id, request);
+        var areaMap = _mapper.Map<Area>(request);
+        var result = await _areaRepository.Update(id, areaMap);
 
         return Ok(result);
     }
@@ -50,7 +57,7 @@ public class AreaController : ControllerBase
     public async Task<ActionResult<Area>> DeleteArea(int id)
     {
         var result = await _areaRepository.Delete(id);
-
+        
         return Ok(result);
     }
 }
