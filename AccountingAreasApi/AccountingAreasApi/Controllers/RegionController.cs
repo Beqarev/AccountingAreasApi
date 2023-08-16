@@ -21,8 +21,9 @@ public class RegionController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Region>>> GetAllRegions()
     {
-        var regions = _mapper.Map<RegionDto>(await _regionRepositroy.GetAll());
-        return Ok(regions);
+        var regions = await _regionRepositroy.GetAll();
+        var regionDtos = _mapper.Map<List<RegionDto>>(regions);
+        return Ok(regionDtos);
     }
 
     [HttpGet("{id}")]

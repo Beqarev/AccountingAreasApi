@@ -23,8 +23,9 @@ public class AreaController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<AreaDto>>> GetAllAreas()
     {
-        var areas = _mapper.Map<AreaDto>(await _areaRepository.GetAll());
-        return Ok(areas);
+        var areas = await _areaRepository.GetAll();
+        var areaDtos = _mapper.Map<List<AreaDto>>(areas);
+        return Ok(areaDtos);
     }
 
     [HttpGet("{id}")]
