@@ -2,6 +2,7 @@ using AccountingAreasApi.Dto;
 using AccountingAreasApi.Interfaces;
 using AccountingAreasApi.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountingAreasApi.Controllers;
