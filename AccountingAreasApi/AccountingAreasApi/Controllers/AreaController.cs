@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountingAreasApi.Controllers;
-
-[Route("api/area")]
 [ApiController]
+[Route("api/area")]
+[Authorize]
 public class AreaController : ControllerBase
 {
     private readonly IAreaRepository _areaRepository;

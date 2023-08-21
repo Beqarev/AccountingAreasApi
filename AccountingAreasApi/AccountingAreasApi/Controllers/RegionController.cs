@@ -2,11 +2,13 @@ using AccountingAreasApi.Dto;
 using AccountingAreasApi.Interfaces;
 using AccountingAreasApi.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountingAreasApi.Controllers;
-[Route("api/region")]
 [ApiController]
+[Route("api/region")]
+[Authorize]
 public class RegionController : ControllerBase
 {
     private readonly IRegionRepositroy _regionRepositroy;

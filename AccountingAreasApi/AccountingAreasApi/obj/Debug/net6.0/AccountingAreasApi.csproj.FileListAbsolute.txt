@@ -90,3 +90,6 @@
 /Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Microsoft.Extensions.Identity.Core.dll
 /Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Scrutor.dll
+/Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/beqa/Desktop/Projects/AccountingAreasApi/AccountingAreasApi/AccountingAreasApi/bin/Debug/net6.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll

@@ -12,5 +12,5 @@ public class DataContext : DbContext
 
     public DbSet<Area> Areas { get; set; }
     public DbSet<Region> Regions { get; set; }
-    
+    public DbSet<User> Users { get; set; }
 }
