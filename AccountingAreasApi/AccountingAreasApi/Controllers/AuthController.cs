@@ -32,6 +32,9 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<User>> Register(UserDto request)
     {
+        if (_userRepository.UserExists(request))
+            return BadRequest("Username already exists");
+        
         CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
         user.Username = request.Username;
         user.PasswordHash = passwordHash;
@@ -55,14 +58,15 @@ public class AuthController : ControllerBase
             return BadRequest("Wrong password");
         
         string token = CreateToken(userToLogin);
-        return Ok(token);
+        return Ok("bearer " + token);
     }
 
     private string CreateToken(User user)
     {
         List<Claim> claims = new List<Claim>()
         { 
-            new Claim(ClaimTypes.Name, user.Username)
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Role, "Admin")
         };
 
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

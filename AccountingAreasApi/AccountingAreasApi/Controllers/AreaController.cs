@@ -21,7 +21,7 @@ public class AreaController : ControllerBase
     }
 
 
-    [HttpGet]
+    [HttpGet, Authorize("Admin")]
     public async Task<ActionResult<List<AreaDto>>> GetAllAreas()
     {
         var areas = await _areaRepository.GetAll();
